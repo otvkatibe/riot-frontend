@@ -72,7 +72,7 @@ export default function HomePage() {
 
   return (
     <div className="home-container">
-      <h1>Consultar Maestria de Campeões</h1>
+      <h1>🔍 Dados de League of Legends</h1>
       
       <form onSubmit={handleSubmit} className="search-form">
         <input
