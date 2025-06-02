@@ -163,10 +163,11 @@ export default function HomePage() {
         <div className="mastery-results">
           <h2>Top 10 Maestrias</h2>
           <div className="champion-grid">
-            {masteryData.map((champ) => (
+            {masteryData.map((champ, index) => (
               <ChampionCard
                 key={champ.championIcon}
                 champ={champ}
+                index={index} // Passa o índice do campeão
                 onClick={() => handleChampionClick(champ.championIcon)}
               />
             ))}

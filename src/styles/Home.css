@@ -129,23 +129,33 @@ body {
   border-bottom: 2px solid #ff007f;
 }
 
+/* Grid de campeões */
 .champion-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Responsivo */
   gap: 1.5rem;
+  justify-items: center;
+  align-items: center;
+  margin-top: 1.5rem;
 }
 
-/* Estilo dos cards de campeão com hover melhorado */
+/* Estilo dos cards de campeão */
 .champion-card {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 1rem;
-  padding: 1.2rem;
+  justify-content: center; /* Centraliza o conteúdo interno */
+  gap: 0.5rem;
+  width: 150px; /* Largura fixa */
+  height: 220px; /* Altura fixa */
+  padding: 1rem; /* Espaçamento interno */
   background: #2a2a2a;
   border-radius: 8px;
   transition: all 0.3s ease;
   border: 1px solid transparent;
   cursor: pointer;
+  text-align: center;
+  box-sizing: border-box; /* Inclui padding no tamanho total */
 }
 
 .champion-card:hover {
@@ -155,10 +165,11 @@ body {
   border-color: #ff007f;
 }
 
+/* Imagem do campeão */
 .champion-card img {
-  width: 64px;
-  height: 64px;
-  border-radius: 8px;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
   object-fit: cover;
   border: 2px solid transparent;
   transition: all 0.3s;
@@ -169,38 +180,23 @@ body {
   transform: scale(1.05);
 }
 
-.champion-info {
-  flex: 1;
-}
-
-.champion-name {
+/* Nome do campeão */
+.champion-card h3 {
+  font-size: 1rem;
   font-weight: 600;
-  margin-bottom: 0.3rem;
-  transition: color 0.3s;
-}
-
-.champion-card:hover .champion-name {
-  color: #ff007f;
-}
-
-.champion-position {
-  color: #ffcc00;
-  font-size: 0.9rem;
-  transition: all 0.3s;
-}
-
-.champion-card:hover .champion-position {
-  transform: translateX(5px);
-}
-
-.champion-points {
-  color: #aaa;
-  font-size: 0.85rem;
-  transition: all 0.3s;
-}
-
-.champion-card:hover .champion-points {
   color: #fff;
+  margin: 0;
+  text-align: center;
+  white-space: nowrap; /* Evita quebra de linha */
+  overflow: hidden;
+  text-overflow: ellipsis; /* Adiciona "..." se o texto for muito longo */
+}
+
+/* Pontos de maestria */
+.champion-card p {
+  font-size: 0.85rem;
+  color: #aaa;
+  margin: 0;
 }
 
 /* Efeito hover na tabela de favoritos */
