@@ -453,7 +453,7 @@ export default function HomeLoggedPage() {
               <ChampionCard
                 key={champ.championIcon}
                 champ={champ}
-                index={index} // Passa o índice do campeão
+                index={index}
                 onClick={() => handleChampionClick(champ.championIcon)}
               />
             ))}

@@ -34,7 +34,7 @@ export default function LoginPage() {
   return (
     <div className="home-container" style={{ maxWidth: 400, margin: '4rem auto' }}>
       <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
-        <h1 style={{ margin: 0, fontWeight: 700, fontSize: '2rem', color: '#ff007f' }}>APP RIOT</h1>
+        <h1 style={{ margin: 0, fontWeight: 700, fontSize: '2rem', color: '#ff007f' }}>Login</h1>
       </div>
       <form className="search-form" onSubmit={handleSubmit}>
         <input

@@ -27,13 +27,13 @@ export default function RegisterPage() {
   return (
     <div className="home-container" style={{ maxWidth: 400, margin: '4rem auto' }}>
       <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
-        <h1 style={{ margin: 0, fontWeight: 700, fontSize: '2rem', color: '#ff007f' }}>Registrar Invocador</h1>
+        <h1 style={{ margin: 0, fontWeight: 700, fontSize: '2rem', color: '#ff007f' }}>Registrar</h1>
       </div>
       <form className="search-form" onSubmit={handleSubmit}>
         <input
           className="search-input"
           type="text"
-          placeholder="Usuário lol"
+          placeholder="Usuário"
           value={form.name}
           onChange={e => setForm(f => ({ ...f, name: e.target.value }))}
           required
