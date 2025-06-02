@@ -1,4 +1,3 @@
-import React from 'react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ChampionCard from '../components/ChampionCard';
@@ -24,23 +23,27 @@ export default function HomePage() {
     try {
       // 1. Busca PUUID
       const puuidResponse = await fetch(
-        `https://riot-backend.vercel.app/api/puuid?nome=${encodeURIComponent(formData.nome)}&tag=${encodeURIComponent(formData.tag)}`
+        `https://riot-backend.vercel.app/riot/puuid?nome=${encodeURIComponent(formData.nome)}&tag=${encodeURIComponent(formData.tag)}`
       );
 
       if (!puuidResponse.ok) {
         const errorData = await puuidResponse.json();
-        throw new Error(errorData.error || 'Erro ao buscar conta do jogador');
+        if (puuidResponse.status === 500) {
+          throw new Error('Não foi possível encontrar o jogador. Verifique se o nome e a tag estão corretos ou tente novamente mais tarde.');
+        }
+        throw new Error(errorData.message || 'Erro ao buscar conta do jogador');
       }
 
       const { puuid } = await puuidResponse.json();
 
       // 2. Busca informações do perfil
       const profileResponse = await fetch(
-        `https://riot-backend.vercel.app/api/perfil?puuid=${puuid}`
+        `https://riot-backend.vercel.app/riot/profile?puuid=${puuid}`
       );
 
       if (!profileResponse.ok) {
-        throw new Error('Erro ao buscar perfil do jogador');
+        const errorData = await profileResponse.json();
+        throw new Error(errorData.message || 'Erro ao buscar perfil do jogador');
       }
 
       const profileData = await profileResponse.json();
@@ -48,11 +51,12 @@ export default function HomePage() {
 
       // 3. Busca dados de maestria
       const masteryResponse = await fetch(
-        `https://riot-backend.vercel.app/api/dados?nome=${encodeURIComponent(formData.nome)}&tag=${encodeURIComponent(formData.tag)}&tipo=maestria`
+        `https://riot-backend.vercel.app/riot/maestria?nome=${encodeURIComponent(formData.nome)}&tag=${encodeURIComponent(formData.tag)}`
       );
 
       if (!masteryResponse.ok) {
-        throw new Error('Erro ao buscar dados de maestria');
+        const errorData = await masteryResponse.json();
+        throw new Error(errorData.message || 'Erro ao buscar dados de maestria');
       }
 
       const { dados } = await masteryResponse.json();
@@ -72,6 +76,16 @@ export default function HomePage() {
 
   return (
     <div className="home-container">
+      {/* Barra superior com botão de login */}
+      <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '1rem' }}>
+        <button
+          className="search-button"
+          style={{ width: 'auto', minWidth: 100 }}
+          onClick={() => navigate('/login')}
+        >
+          Login
+        </button>
+      </div>
       <h1>🔍 Dados de League of Legends</h1>
       
       <form onSubmit={handleSubmit} className="search-form">

@@ -1,4 +1,3 @@
-import React from 'react';
 import { useState, useEffect } from 'react';
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import Loading from '../components/Loading';
@@ -27,13 +26,13 @@ export default function ChampionDetailsPage() {
 
         // Buscar dados do campeão e estatísticas em paralelo
         const [detailsRes, championRes] = await Promise.all([
-          fetch(`https://riot-backend.vercel.app/api/detalhes?nome=${encodeURIComponent(nome)}&tag=${encodeURIComponent(tag)}&champion=${championId}`),
+          fetch(`https://riot-backend.vercel.app/riot/champion-stats?nome=${encodeURIComponent(nome)}&tag=${encodeURIComponent(tag)}&champion=${championId}`),
           fetch(`https://ddragon.leagueoflegends.com/cdn/14.8.1/data/pt_BR/champion/${championId}.json`)
         ]);
 
         if (!detailsRes.ok) {
           const errorData = await detailsRes.json();
-          throw new Error(errorData.error || 'Erro ao buscar estatísticas');
+          throw new Error(errorData.message || 'Erro ao buscar estatísticas');
         }
 
         if (!championRes.ok) {
